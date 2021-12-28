@@ -1,9 +1,7 @@
 {
   "app": "node bin/aws-cdk-security.js",
   "watch": {
-    "include": [
-      "**"
-    ],
+    "include": ["**"],
     "exclude": [
       "README.md",
       "cdk*.json",

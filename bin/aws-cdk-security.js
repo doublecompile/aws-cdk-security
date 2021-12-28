@@ -1,21 +1,41 @@
 #!/usr/bin/env node
 
-const cdk = require('aws-cdk-lib');
-const { AwsCdkSecurityStack } = require('../lib/aws-cdk-security-stack');
+const cdk = require("aws-cdk-lib");
+const { GuardDutyAccountStack } = require("../lib/stack");
 
+// Construct our AWS CDK app.
 const app = new cdk.App();
-new AwsCdkSecurityStack(app, 'AwsCdkSecurityStack', {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
 
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+// Regions disabled in my account.
+// 'af-south-1', 'ap-east-1', 'me-south-1', 'eu-south-1', 'ap-southeast-3'
+const guardDutyRegions = [
+  "us-east-1",
+  "us-east-2",
+  "us-west-1",
+  "us-west-2",
+  "ap-south-1",
+  "ap-northeast-3",
+  "ap-northeast-2",
+  "ap-southeast-1",
+  "ap-southeast-2",
+  "ap-northeast-1",
+  "ca-central-1",
+  "eu-central-1",
+  "eu-west-1",
+  "eu-west-2",
+  "eu-west-3",
+  "eu-north-1",
+  "sa-east-1",
+];
+const stacks = guardDutyRegions.map(
+  (region) =>
+    new GuardDutyAccountStack(app, "OrgSecurity", {
+      env: {
+        account: process.env.CDK_DEFAULT_ACCOUNT,
+        region: region,
+      },
+    })
+);
 
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
-
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
-});
+// Synthesize the CloudFormation template.
+app.synth();

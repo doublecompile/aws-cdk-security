@@ -1,20 +1,35 @@
 {
-  "name": "aws-cdk-security",
+  "name": "@doublecompile/aws-cdk-security",
+  "description": "An AWS CDK app providing a stack comprising sane setup of security admin accounts in an organization",
   "version": "0.1.0",
+  "license": "Apache-2.0",
   "bin": {
     "aws-cdk-security": "bin/aws-cdk-security.js"
   },
   "scripts": {
+    "lint": "eslint .",
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
     "cdk": "cdk",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --write .",
+    "prettier-ci": "prettier --list-different ."
   },
   "devDependencies": {
     "aws-cdk": "2.3.0",
-    "jest": "^26.4.2"
+    "eslint": "^8.5.0",
+    "jest": "^26.4.2",
+    "prettier": "2.5.1"
   },
   "dependencies": {
     "aws-cdk-lib": "2.3.0",
     "constructs": "^10.0.0"
+  },
+  "repository": "github:doublecompile/aws-cdk-security",
+  "bugs": {
+    "url": "https://github.com/doublecompile/aws-cdk-security/issues"
+  },
+  "homepage": "https://github.com/doublecompile/aws-cdk-security",
+  "engines": {
+    "node": ">=10.13.0"
   }
 }
