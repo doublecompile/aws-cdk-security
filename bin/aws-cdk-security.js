@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const cdk = require("aws-cdk-lib");
-const { GuardDutyAccountStack } = require("../lib/stack");
+const { SecurityAccountStack } = require("../lib/stack");
 
 // Construct our AWS CDK app.
 const app = new cdk.App();
@@ -29,7 +29,7 @@ const guardDutyRegions = [
 ];
 const stacks = guardDutyRegions.map(
   (region) =>
-    new GuardDutyAccountStack(app, "OrgSecurity", {
+    new SecurityAccountStack(app, `OrgSecurity-${region}`, {
       env: {
         account: process.env.CDK_DEFAULT_ACCOUNT,
         region: region,
